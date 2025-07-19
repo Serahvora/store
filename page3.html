@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Qwerty | General Collection ✨</title>
+    <title>Searhvora | General Collection ✨</title>
     <link rel="icon" href="images/logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -418,15 +418,15 @@
 <body>
 
 <div class="sidebar">
-    <h3>QWERTY</h3>
-    <a href="index1.html">👧 Girls</a>
-    <a href="index2.html">👦 Boys</a>
-    <a href="index3.html">🌟 General</a>
+    <h3>Serahvora</h3>
+    <a href="index.html">👧 Girls</a>
+    <a href="page2.html">👦 Boys</a>
+    <a href="page3.html">🌟 General</a>
 </div>
 
 <header>
-    <img src="https://via.placeholder.com/80/a0522d/f0e68c?text=Q" alt="Qwerty Logo" class="logo">
-    <h1>Qwerty</h1>
+    <img src="https://via.placeholder.com/80/a0522d/f0e68c?text=Q" alt="Serahvora Logo" class="logo">
+    <h1>Serahvora</h1>
     <p class="tagline">Earthy. Essential. For Everyone. ✨</p>
 </header>
 
@@ -547,7 +547,7 @@
 </div>
 
 <footer>
-    <p>© 2025 Qwerty Drops • Teen Built</p>
+    <p>© 2025 Serahvora Drops • Teen Built</p>
 </footer>
 
 <div class="funny-note">
@@ -599,7 +599,7 @@
     let cart = [];
 
     function loadCart() {
-        const storedCart = localStorage.getItem('qwertyGeneralCart'); // Unique key for General page
+        const storedCart = localStorage.getItem('SerahvoraGeneralCart'); // Unique key for General page
         if (storedCart) {
             cart = JSON.parse(storedCart);
             renderCart();
@@ -607,7 +607,7 @@
     }
 
     function saveCart() {
-        localStorage.setItem('qwertyGeneralCart', JSON.stringify(cart)); // Unique key for General page
+        localStorage.setItem('SerahvoraGeneralCart', JSON.stringify(cart)); // Unique key for General page
     }
 
     function renderCart() {
@@ -658,7 +658,7 @@
             return;
         }
 
-        let message = "Hi Qwerty! I'd like to order the following general items:\n\n";
+        let message = "Hi Serahvora! I'd like to order the following general items:\n\n";
         let total = 0;
 
         cart.forEach((item, index) => {
