@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Qwerty | Girls Collection 💖</title>
+    <link rel="icon" href="images/logo.png" type="image/png"> <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fff6f9;
+            color: #333;
+            padding-left: 200px; /* Space for sidebar */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 180px;
+            background: #ffccdf;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 100; /* Ensure sidebar is above main content */
+        }
+
+        .sidebar h3 {
+            font-size: 1.3rem;
+            color: #cc0077;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            margin-bottom: 15px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            color: #ff3399;
+        }
+
+        /* Header */
+        header {
+            background-color: #ffe1ef;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #ff3399;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #aa2288;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #ffddee, #e0cfff);
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #ff77c2;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff44a5;
+        }
+
+        /* Sections and Product Grid */
+        section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #ff3399;
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 2px solid #ffddee;
+            border-radius: 15px;
+            padding: 15px;
+            width: 180px;
+            box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+            height: 150px; /* Fixed height for product images */
+            object-fit: cover; /* Ensures images cover the area without distortion */
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+            color: #cc0077;
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #cc3399;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 5px; /* Adjust margin */
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #aa2288;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #ffdcee;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aa2288;
+        }
+
+        .funny-note {
+            font-size: 0.9rem;
+            margin-top: 40px;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff2f8;
+            color: #aa2288;
+        }
+
+        /* Fire Emoji Animation */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .fire-emoji {
+            position: fixed;
+            top: -50px; /* Start above the viewport */
+            animation: fall 3s linear forwards;
+            pointer-events: none; /* Allows clicks to pass through */
+            user-select: none;
+            font-size: 25px; /* Size of the emoji */
+            z-index: 9999; /* High z-index to be on top */
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex; /* Changed to flex to center content */
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            visibility: hidden; /* Use visibility to allow smooth transitions */
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 350px; /* Slightly wider modal */
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            background: #ff77c2;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #ff44a5;
+        }
+
+        /* Mini Cart Sidebar */
+        #miniCart {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            width: 240px;
+            background: #fff0f9;
+            border: 2px solid #ffccdf;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 9999;
+        }
+
+        #miniCart h3 {
+            margin-top: 0;
+            color: #cc3399;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #miniCart h3 span {
+            font-size: 0.9rem;
+            background-color: #ffccdf;
+            padding: 3px 8px;
+            border-radius: 10px;
+            color: #cc0077;
+        }
+
+        #miniCart p {
+            font-size: 0.9rem;
+            color: #aa2288;
+            margin: 10px 0;
+        }
+
+        #cartList {
+            list-style: none;
+            padding-left: 0;
+            max-height: 200px;
+            overflow-y: auto; /* Changed to overflow-y for vertical scrolling */
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        #cartList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px dotted #ffddee;
+            color: #555;
+        }
+
+        #cartList li:last-child {
+            border-bottom: none;
+        }
+
+        #cartList li .remove-item {
+            background: none;
+            border: none;
+            color: #ff3399;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0 5px;
+            transition: color 0.2s;
+        }
+
+        #cartList li .remove-item:hover {
+            color: #cc0077;
+        }
+
+        #sendCartBtn {
+            background: #cc3399;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        #sendCartBtn:hover {
+            background-color: #aa2288;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff0f9;
+            border-bottom: 2px solid #ffccdf;
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 70%;
+            max-width: 400px;
+            padding: 10px 15px;
+            border: 2px solid #ff77c2;
+            border-radius: 25px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: #cc3399;
+            box-shadow: 0 0 8px rgba(204, 51, 153, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-left: 0; /* Remove padding for smaller screens */
+            }
+
+            .sidebar {
+                position: relative; /* Make sidebar flow with content */
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding-bottom: 0;
+            }
+
+            .sidebar h3 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .sidebar a {
+                display: inline-block; /* Display links inline */
+                margin: 0 10px 10px;
+            }
+
+            #miniCart {
+                position: static; /* Position statically for smaller screens */
+                width: auto;
+                margin: 20px;
+            }
+
+            .search-container input[type="text"] {
+                width: 90%; /* Wider search bar on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>QWERTY</h3>
+    <a href="index1.html">👧 Girls</a>
+    <a href="index2.html">👦 Boys</a>
+    <a href="index3.html">🌟 General</a>
+</div>
+
+<header>
+    <img src="https://via.placeholder.com/80/ffccdf/cc0077?text=Q" alt="Qwerty Logo" class="logo">
+    <h1>Qwerty</h1>
+    <p class="tagline">Trendy finds. Teen vibes. 💖</p>
+</header>
+
+<section class="hero">
+    <h2>✨ Shop Cute & Cool Items for Less ✨</h2>
+    <p>enjoy shopping</p>
+    <a href="#products" class="btn">Explore Products</a>
+</section>
+
+<div class="search-container">
+    <input type="text" id="productSearch" placeholder="Search for products...">
+</div>
+
+<section id="products">
+    <h2>Trending Now!🔥</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Pastel Stickers Pack" data-price="3.50" data-description="50+ aesthetic stickers to decorate anything.">
+            <img src="https://via.placeholder.com/150/f8c0d8/ffffff?text=Stickers" alt="Stickers">
+            <h3>Pastel Stickers Pack</h3>
+            <p>$3.50</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Heart Mirror" data-price="4.99" data-description="Cute pink mirror for your desk or makeup area.">
+            <img src="https://via.placeholder.com/150/ff99cc/ffffff?text=Mirror" alt="Heart Mirror">
+            <h3>Heart Mirror</h3>
+            <p>$4.99</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Kawaii Phone Case" data-price="6.99" data-description="Soft silicone pastel phone case. Super kawaii!">
+            <img src="https://via.placeholder.com/150/e0cfff/ffffff?text=Phone+Case" alt="Phone Case">
+            <h3>Kawaii Phone Case</h3>
+            <p>$6.99</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Unicorn Pen Set" data-price="5.25" data-description="Magical unicorn pens for school or drawing.">
+            <img src="https://via.placeholder.com/150/c0e8f8/ffffff?text=Unicorn+Pens" alt="Unicorn Pen Set">
+            <h3>Unicorn Pen Set</h3>
+            <p>$5.25</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section id="girls-collection">
+    <h2>🛍️ Girls' Collection</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Sparkle Headband" data-price="7.00" data-description="Glittery headband for a dazzling look.">
+            <img src="https://via.placeholder.com/150/ffd7e0/ffffff?text=Headband" alt="Sparkle Headband">
+            <h3>Sparkle Headband</h3>
+            <p>$7.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Rainbow Socks" data-price="8.50" data-description="Comfy and colorful rainbow striped socks.">
+            <img src="https://via.placeholder.com/150/f0e0ff/ffffff?text=Rainbow+Socks" alt="Rainbow Socks">
+            <h3>Rainbow Socks</h3>
+            <p>$8.50</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Cute Mini Backpack" data-price="12.00" data-description="Small, stylish backpack for essentials.">
+            <img src="https://via.placeholder.com/150/e6f5ff/ffffff?text=Mini+Backpack" alt="Cute Mini Backpack">
+            <h3>Cute Mini Backpack</h3>
+            <p>$12.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Glitter Hair Clips (Set of 4)" data-price="4.00" data-description="Sparkly hair clips to add flair.">
+            <img src="https://via.placeholder.com/150/ffefc0/ffffff?text=Hair+Clips" alt="Glitter Hair Clips">
+            <h3>Glitter Hair Clips (Set of 4)</h3>
+            <p>$4.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section id="new-arrivals">
+    <h2>New Arrivals ✨</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Cloud Squishy Toy" data-price="3.00" data-description="Super soft and squishy cloud toy.">
+            <img src="https://via.placeholder.com/150/d0e0ff/ffffff?text=Cloud+Toy" alt="Cloud Squishy Toy">
+            <h3>Cloud Squishy Toy</h3>
+            <p>$3.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Mermaid Tail Keychain" data-price="2.50" data-description="Shimmering mermaid tail keychain for your keys.">
+            <img src="https://via.placeholder.com/150/aafff0/ffffff?text=Mermaid+Keychain" alt="Mermaid Tail Keychain">
+            <h3>Mermaid Tail Keychain</h3>
+            <p>$2.50</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Galaxy Notebook" data-price="5.75" data-description="A beautiful notebook with a galaxy print.">
+            <img src="https://via.placeholder.com/150/cceeff/ffffff?text=Galaxy+Notebook" alt="Galaxy Notebook">
+            <h3>Galaxy Notebook</h3>
+            <p>$5.75</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Fluffy Pen" data-price="3.99" data-description="A cute pen with a soft, fluffy topper.">
+            <img src="https://via.placeholder.com/150/ffebee/ffffff?text=Fluffy+Pen" alt="Fluffy Pen">
+            <h3>Fluffy Pen</h3>
+            <p>$3.99</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<div class="modal" id="popupModal">
+    <div class="modal-content">
+        <h3 id="popupTitle">Product Title</h3>
+        <p id="popupPrice">Product Price</p>
+        <p id="popupDesc">Product Description</p>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<div id="miniCart">
+    <h3>🛍️ Your Cart <span id="cartItemCount">(0)</span></h3>
+    <p style="font-size:0.9rem; color:#aa2288; margin:10px 0;">⚠️ Don’t refresh this page if you want to lose your cart (just kidding, it saves now)!</p>
+    <ul id="cartList"></ul>
+    <button id="sendCartBtn">📤 Send via WhatsApp</button>
+</div>
+
+<footer>
+    <p>© 2025 Qwerty Drops • Teen Built</p>
+</footer>
+
+<div class="funny-note">
+    ⚠️ Heads up! This site is made by beginner teens learning to code. Thanks for being awesome and supporting our journey! 💻💖
+</div>
+
+<script>
+    const popupModal = document.getElementById('popupModal');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupPrice = document.getElementById('popupPrice');
+    const popupDesc = document.getElementById('popupDesc');
+    const productCards = document.querySelectorAll('.product-card');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const cartList = document.getElementById('cartList');
+    const sendCartBtn = document.getElementById('sendCartBtn');
+    const cartItemCountSpan = document.getElementById('cartItemCount');
+    const productSearchInput = document.getElementById('productSearch'); // New: Search input
+    const allProductSections = document.querySelectorAll('section[id$="-collection"], section[id="products"]'); // New: All product sections
+
+
+    // --- Modal Functionality ---
+    productCards.forEach(card => {
+        card.addEventListener('click', (event) => {
+            // Prevent modal from opening if add to cart button was clicked
+            if (event.target.classList.contains('add-to-cart-btn')) {
+                return;
+            }
+            const title = card.dataset.title;
+            const price = card.dataset.price;
+            const description = card.dataset.description;
+
+            popupTitle.textContent = title;
+            popupPrice.textContent = `$${parseFloat(price).toFixed(2)}`; // Format price
+            popupDesc.textContent = description;
+            popupModal.classList.add('show');
+        });
+    });
+
+    function closeModal() {
+        popupModal.classList.remove('show');
+    }
+
+    // Close modal if clicking outside content
+    popupModal.addEventListener('click', (event) => {
+        if (event.target === popupModal) {
+            closeModal();
+        }
+    });
+
+    // --- Cart Functionality ---
+    let cart = []; // Array to store cart items
+
+    // Load cart from localStorage on page load
+    function loadCart() {
+        const storedCart = localStorage.getItem('qwertyCart');
+        if (storedCart) {
+            cart = JSON.parse(storedCart);
+            renderCart();
+        }
+    }
+
+    // Save cart to localStorage
+    function saveCart() {
+        localStorage.setItem('qwertyCart', JSON.stringify(cart));
+    }
+
+    // Render cart items in the mini cart
+    function renderCart() {
+        cartList.innerHTML = ''; // Clear current list
+        if (cart.length === 0) {
+            cartList.innerHTML = '<li style="color: #777; text-align: center;">Your cart is empty.</li>';
+        } else {
+            cart.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span>${item.title} - $${parseFloat(item.price).toFixed(2)}</span>
+                    <button class="remove-item" data-index="${index}">✖</button>
+                `;
+                cartList.appendChild(listItem);
+            });
+        }
+        updateCartItemCount();
+        saveCart(); // Save after rendering
+    }
+
+    // Update the item count in the cart header
+    function updateCartItemCount() {
+        cartItemCountSpan.textContent = `(${cart.length})`;
+    }
+
+    // Add item to cart
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const productCard = event.target.closest('.product-card');
+            const title = productCard.dataset.title;
+            const price = productCard.dataset.price;
+
+            cart.push({ title, price });
+            renderCart();
+            // Optional: Provide feedback that item was added
+            // alert(`${title} added to cart!`); // Removed to reduce popups
+        });
+    });
+
+    // Remove item from cart
+    cartList.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-item')) {
+            const indexToRemove = parseInt(event.target.dataset.index);
+            cart.splice(indexToRemove, 1); // Remove item at index
+            renderCart();
+        }
+    });
+
+    // --- WhatsApp Share Functionality ---
+    sendCartBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Your cart is empty! Add some items first. 🛍️');
+            return;
+        }
+
+        let message = "Hi Qwerty! I'd like to order the following items from your shop:\n\n";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.title} - $${parseFloat(item.price).toFixed(2)}\n`;
+            total += parseFloat(item.price);
+        });
+
+        message += `\nTotal: $${total.toFixed(2)}`;
+        message += "\n\nCan you please confirm the availability and total for these items? Thanks! 😊";
+
+        // IMPORTANT: Replace 'YOUR_PHONE_NUMBER' with your actual WhatsApp number (e.g., 971501234567)
+        const YOUR_WHATSAPP_NUMBER = '971501234567'; // <-- REPLACE THIS WITH YOUR NUMBER
+        const whatsappURL = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappURL, '_blank');
+    });
+
+    // --- Fire Emoji Animation ---
+    function createFallingEmoji() {
+        const emoji = document.createElement('span');
+        emoji.classList.add('fire-emoji');
+        emoji.textContent = '💖'; // Or '✨', '🔥', '🎀'
+
+        // Random starting position (horizontal)
+        emoji.style.left = `${Math.random() * 100}vw`;
+        // Random animation duration for variety
+        emoji.style.animationDuration = `${Math.random() * 2 + 3}s`; // 3 to 5 seconds
+        // Random size
+        emoji.style.fontSize = `${Math.random() * 15 + 20}px`; // 20px to 35px
+
+        document.body.appendChild(emoji);
+
+        // Remove emoji after animation ends to prevent DOM overload
+        emoji.addEventListener('animationend', () => {
+            emoji.remove();
+        });
+    }
+
+    // Create a new emoji every 500ms
+    setInterval(createFallingEmoji, 500);
+
+    // --- Search Functionality ---
+    productSearchInput.addEventListener('keyup', () => {
+        const searchTerm = productSearchInput.value.toLowerCase();
+
+        if (searchTerm === "") {
+            // If search bar is empty, show all sections
+            allProductSections.forEach(section => {
+                section.style.display = 'block'; // Or 'flex' or 'grid' if that's its natural display
+            });
+            // Make all product cards visible
+            productCards.forEach(card => {
+                card.style.display = 'block'; // Show all cards
+            });
+            return; // Exit function
+        }
+
+        // Hide all product sections first
+        allProductSections.forEach(section => {
+            section.style.display = 'none';
+        });
+
+        // Loop through all product cards to find matches
+        productCards.forEach(card => {
+            const title = card.dataset.title.toLowerCase();
+            const description = card.dataset.description.toLowerCase();
+
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                card.style.display = 'block'; // Show matching card
+                // Ensure its parent section is visible
+                card.closest('section').style.display = 'block';
+            } else {
+                card.style.display = 'none'; // Hide non-matching card
+            }
+        });
+    });
+
+    // Initial load of the cart when the page loads
+    document.addEventListener('DOMContentLoaded', loadCart);
+</script>
+
+</body>
+</html>

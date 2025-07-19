@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Qwerty | Boys' Teen Collection ⚡</title>
+    <link rel="icon" href="images/logo.png" type="image/png"> <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f4f7; /* Light cool gray */
+            color: #333;
+            padding-left: 200px; /* Space for sidebar */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 180px;
+            background: #4a6fa5; /* Deep muted blue */
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .sidebar h3 {
+            font-size: 1.3rem;
+            color: #e0f2f7; /* Light blue-gray for contrast */
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            margin-bottom: 15px;
+            color: #b0d3e8; /* Lighter blue-gray */
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            color: #ffffff; /* White on hover */
+        }
+
+        /* Header */
+        header {
+            background-color: #628395; /* Muted teal-blue */
+            padding: 30px 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .logo {
+            width: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #d1e8ed; /* Light blue for title */
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #e0f2f7; /* Lighter text for tagline */
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #8b9dc3, #6f8099); /* Blue-gray gradient */
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #e0f2f7;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #5585b5; /* Medium blue */
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #406280; /* Darker blue on hover */
+        }
+
+        /* Sections and Product Grid */
+        section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #4a6fa5; /* Deep muted blue for section titles */
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 2px solid #b0d3e8; /* Lighter blue border */
+            border-radius: 15px;
+            padding: 15px;
+            width: 180px;
+            box-shadow: 0 4px 10px rgba(74, 111, 165, 0.15); /* Blueish shadow */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+            color: #3f5f85; /* Darker blue for product titles */
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #5585b5; /* Medium blue */
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #406280; /* Darker blue on hover */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #a3bac3; /* Muted light blue-gray */
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #3f5f85;
+        }
+
+        .funny-note {
+            font-size: 0.9rem;
+            margin-top: 40px;
+            text-align: center;
+            padding: 10px;
+            background-color: #e0f2f7; /* Very light cool blue */
+            color: #3f5f85;
+        }
+
+        /* Falling Emoji Animation (Lightning Bolt) */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .fall-emoji { /* Renamed class for clarity */
+            position: fixed;
+            top: -50px;
+            animation: fall 3s linear forwards;
+            pointer-events: none;
+            user-select: none;
+            font-size: 25px;
+            z-index: 9999;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7); /* Darker overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 350px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            background: #5585b5; /* Medium blue */
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #406280;
+        }
+
+        /* Mini Cart Sidebar */
+        #miniCart {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            width: 240px;
+            background: #e0f2f7; /* Light cool blue */
+            border: 2px solid #a3bac3; /* Muted border */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 9999;
+        }
+
+        #miniCart h3 {
+            margin-top: 0;
+            color: #3f5f85; /* Dark blue */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #miniCart h3 span {
+            font-size: 0.9rem;
+            background-color: #b0d3e8; /* Lighter blue-gray */
+            padding: 3px 8px;
+            border-radius: 10px;
+            color: #3f5f85;
+        }
+
+        #miniCart p {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        #cartList {
+            list-style: none;
+            padding-left: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        #cartList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px dotted #b0d3e8;
+            color: #555;
+        }
+
+        #cartList li:last-child {
+            border-bottom: none;
+        }
+
+        #cartList li .remove-item {
+            background: none;
+            border: none;
+            color: #5585b5; /* Medium blue */
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0 5px;
+            transition: color 0.2s;
+        }
+
+        #cartList li .remove-item:hover {
+            color: #406280;
+        }
+
+        #sendCartBtn {
+            background: #5585b5; /* Medium blue */
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        #sendCartBtn:hover {
+            background-color: #406280;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #e0f2f7; /* Light cool blue */
+            border-bottom: 2px solid #a3bac3;
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 70%;
+            max-width: 400px;
+            padding: 10px 15px;
+            border: 2px solid #5585b5; /* Medium blue border */
+            border-radius: 25px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: #406280;
+            box-shadow: 0 0 8px rgba(85, 133, 181, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-left: 0;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding-bottom: 0;
+            }
+
+            .sidebar h3 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .sidebar a {
+                display: inline-block;
+                margin: 0 10px 10px;
+            }
+
+            #miniCart {
+                position: static;
+                width: auto;
+                margin: 20px;
+            }
+
+            .search-container input[type="text"] {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>QWERTY</h3>
+    <a href="index1.html">👧 Girls</a>
+    <a href="index2.html">👦 Boys</a>
+    <a href="index3.html">🌟 General</a>
+</div>
+
+<header>
+    <img src="https://via.placeholder.com/80/4a6fa5/e0f2f7?text=Q" alt="Qwerty Logo" class="logo">
+    <h1>Qwerty</h1>
+    <p class="tagline">Gear Up. Level Up. Conquer. ⚡</p>
+</header>
+
+<section class="hero">
+    <h2>🎮 Unleash Your Style. Find Your Edge. 🚀</h2>
+    <p>Discover tech, streetwear, and more.</p>
+    <a href="#products" class="btn">Explore The Collection</a>
+</section>
+
+<div class="search-container">
+    <input type="text" id="productSearch" placeholder="Search for products...">
+</div>
+
+<section id="products">
+    <h2>Trending Now! 🔥</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Wireless Gaming Headset" data-price="49.99" data-description="Immersive sound, comfortable fit. Game on!">
+            <img src="https://via.placeholder.com/150/4a6fa5/ffffff?text=Gaming+Headset" alt="Gaming Headset">
+            <h3>Wireless Gaming Headset</h3>
+            <p>$49.99</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="RGB LED Strip Lights" data-price="18.50" data-description="Illuminate your room with customizable LED lights.">
+            <img src="https://via.placeholder.com/150/628395/ffffff?text=LED+Lights" alt="LED Strip Lights">
+            <h3>RGB LED Strip Lights</h3>
+            <p>$18.50</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Graphic Tee: 'Pixel Glitch'" data-price="24.00" data-description="Cool pixelated glitch design. 100% cotton.">
+            <img src="https://via.placeholder.com/150/8b9dc3/ffffff?text=Pixel+Tee" alt="Graphic Tee 'Pixel Glitch'">
+            <h3>Graphic Tee: 'Pixel Glitch'</h3>
+            <p>$24.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Portable Bluetooth Speaker" data-price="35.99" data-description="Powerful sound on the go. Waterproof design.">
+            <img src="https://via.placeholder.com/150/406280/ffffff?text=Bluetooth+Speaker" alt="Portable Bluetooth Speaker">
+            <h3>Portable Bluetooth Speaker</h3>
+            <p>$35.99</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section id="boys-collection">
+    <h2>⚙️ Tech & Gear</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Smartwatch Fitness Tracker" data-price="59.00" data-description="Track steps, heart rate, and notifications.">
+            <img src="https://via.placeholder.com/150/3f5f85/ffffff?text=Smartwatch" alt="Smartwatch Fitness Tracker">
+            <h3>Smartwatch Fitness Tracker</h3>
+            <p>$59.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="USB-C Fast Charging Cable" data-price="12.00" data-description="Durable braided cable for quick charges. 6ft.">
+            <img src="https://via.placeholder.com/150/5585b5/ffffff?text=USB-C+Cable" alt="USB-C Fast Charging Cable">
+            <h3>USB-C Fast Charging Cable</h3>
+            <p>$12.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Compact Gaming Keyboard" data-price="75.00" data-description="Responsive mechanical keys, backlit.">
+            <img src="https://via.placeholder.com/150/6e93c7/ffffff?text=Gaming+Keyboard" alt="Compact Gaming Keyboard">
+            <h3>Compact Gaming Keyboard</h3>
+            <p>$75.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Gamer Mouse Pad (Large)" data-price="15.00" data-description="Extended size for precise gaming movements.">
+            <img src="https://via.placeholder.com/150/7c99a6/ffffff?text=Mouse+Pad" alt="Gamer Mouse Pad">
+            <h3>Gamer Mouse Pad (Large)</h3>
+            <p>$15.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section id="new-arrivals">
+    <h2>New Arrivals 🆕</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Casual Hoodie - Deep Teal" data-price="38.00" data-description="Soft, comfortable hoodie for everyday wear.">
+            <img src="https://via.placeholder.com/150/3d5c6b/ffffff?text=Teal+Hoodie" alt="Casual Hoodie - Deep Teal">
+            <h3>Casual Hoodie - Deep Teal</h3>
+            <p>$38.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Skate Deck - Abstract Design" data-price="55.00" data-description="High-quality maple wood skate deck.">
+            <img src="https://via.placeholder.com/150/5c7a8a/ffffff?text=Skate+Deck" alt="Skate Deck - Abstract Design">
+            <h3>Skate Deck - Abstract Design</h3>
+            <p>$55.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Metal Water Bottle (500ml)" data-price="16.00" data-description="Keeps drinks cold all day. Sleek matte finish.">
+            <img src="https://via.placeholder.com/150/78909c/ffffff?text=Metal+Bottle" alt="Metal Water Bottle">
+            <h3>Metal Water Bottle (500ml)</h3>
+            <p>$16.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Retro Game Console Keychain" data-price="8.00" data-description="Miniature replica of a classic handheld console.">
+            <img src="https://via.placeholder.com/150/9ab8bf/ffffff?text=Console+Keychain" alt="Retro Game Console Keychain">
+            <h3>Retro Game Console Keychain</h3>
+            <p>$8.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<div class="modal" id="popupModal">
+    <div class="modal-content">
+        <h3 id="popupTitle">Product Title</h3>
+        <p id="popupPrice">Product Price</p>
+        <p id="popupDesc">Product Description</p>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<div id="miniCart">
+    <h3>🛍️ Your Cart <span id="cartItemCount">(0)</span></h3>
+    <p style="font-size:0.9rem; color:#555; margin:10px 0;">⚠️ Don’t refresh this page if you want to lose your cart (just kidding, it saves now)!</p>
+    <ul id="cartList"></ul>
+    <button id="sendCartBtn">📤 Send via WhatsApp</button>
+</div>
+
+<footer>
+    <p>© 2025 Qwerty Drops • Teen Built</p>
+</footer>
+
+<div class="funny-note">
+    ⚠️ Heads up! This site is made by beginner teens learning to code. Thanks for being awesome and supporting our journey! 💻⚡
+</div>
+
+<script>
+    const popupModal = document.getElementById('popupModal');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupPrice = document.getElementById('popupPrice');
+    const popupDesc = document.getElementById('popupDesc');
+    const productCards = document.querySelectorAll('.product-card');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const cartList = document.getElementById('cartList');
+    const sendCartBtn = document.getElementById('sendCartBtn');
+    const cartItemCountSpan = document.getElementById('cartItemCount');
+    const productSearchInput = document.getElementById('productSearch');
+    const allProductSections = document.querySelectorAll('section[id$="-collection"], section[id="products"]');
+
+
+    // --- Modal Functionality ---
+    productCards.forEach(card => {
+        card.addEventListener('click', (event) => {
+            if (event.target.classList.contains('add-to-cart-btn')) {
+                return;
+            }
+            const title = card.dataset.title;
+            const price = card.dataset.price;
+            const description = card.dataset.description;
+
+            popupTitle.textContent = title;
+            popupPrice.textContent = `$${parseFloat(price).toFixed(2)}`;
+            popupDesc.textContent = description;
+            popupModal.classList.add('show');
+        });
+    });
+
+    function closeModal() {
+        popupModal.classList.remove('show');
+    }
+
+    popupModal.addEventListener('click', (event) => {
+        if (event.target === popupModal) {
+            closeModal();
+        }
+    });
+
+    // --- Cart Functionality ---
+    let cart = [];
+
+    function loadCart() {
+        const storedCart = localStorage.getItem('qwertyBoysCart'); // Using unique key for boys' page
+        if (storedCart) {
+            cart = JSON.parse(storedCart);
+            renderCart();
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem('qwertyBoysCart', JSON.stringify(cart)); // Using unique key for boys' page
+    }
+
+    function renderCart() {
+        cartList.innerHTML = '';
+        if (cart.length === 0) {
+            cartList.innerHTML = '<li style="color: #777; text-align: center;">Your cart is empty.</li>';
+        } else {
+            cart.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span>${item.title} - $${parseFloat(item.price).toFixed(2)}</span>
+                    <button class="remove-item" data-index="${index}">✖</button>
+                `;
+                cartList.appendChild(listItem);
+            });
+        }
+        updateCartItemCount();
+        saveCart();
+    }
+
+    function updateCartItemCount() {
+        cartItemCountSpan.textContent = `(${cart.length})`;
+    }
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const productCard = event.target.closest('.product-card');
+            const title = productCard.dataset.title;
+            const price = productCard.dataset.price;
+
+            cart.push({ title, price });
+            renderCart();
+        });
+    });
+
+    cartList.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-item')) {
+            const indexToRemove = parseInt(event.target.dataset.index);
+            cart.splice(indexToRemove, 1);
+            renderCart();
+        }
+    });
+
+    // --- WhatsApp Share Functionality ---
+    sendCartBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Your cart is empty! Add some items first. 🛍️');
+            return;
+        }
+
+        let message = "Hey Qwerty! I'd like to grab these from the Teen Boys' collection:\n\n";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.title} - $${parseFloat(item.price).toFixed(2)}\n`;
+            total += parseFloat(item.price);
+        });
+
+        message += `\nTotal: $${total.toFixed(2)}`;
+        message += "\n\nLet me know if these are in stock! Thanks! 🤙";
+
+        // IMPORTANT: Replace 'YOUR_PHONE_NUMBER' with your actual WhatsApp number (e.g., 971501234567)
+        const YOUR_WHATSAPP_NUMBER = '971501234567'; // <-- REPLACE THIS WITH YOUR NUMBER
+        const whatsappURL = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappURL, '_blank');
+    });
+
+    // --- Falling Emojis Animation (Lightning Bolts) ---
+    function createFallingEmoji() {
+        const emoji = document.createElement('span');
+        emoji.classList.add('fall-emoji'); // Changed class name
+        emoji.textContent = '⚡'; // Changed to lightning bolt emoji
+
+        emoji.style.left = `${Math.random() * 100}vw`;
+        emoji.style.animationDuration = `${Math.random() * 2 + 3}s`;
+        emoji.style.fontSize = `${Math.random() * 15 + 20}px`;
+
+        document.body.appendChild(emoji);
+
+        emoji.addEventListener('animationend', () => {
+            emoji.remove();
+        });
+    }
+
+    setInterval(createFallingEmoji, 500);
+
+    // --- Search Functionality ---
+    productSearchInput.addEventListener('keyup', () => {
+        const searchTerm = productSearchInput.value.toLowerCase();
+
+        if (searchTerm === "") {
+            allProductSections.forEach(section => {
+                section.style.display = 'block';
+            });
+            productCards.forEach(card => {
+                card.style.display = 'block';
+            });
+            return;
+        }
+
+        allProductSections.forEach(section => {
+            section.style.display = 'none';
+        });
+
+        productCards.forEach(card => {
+            const title = card.dataset.title.toLowerCase();
+            const description = card.dataset.description.toLowerCase();
+
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                card.style.display = 'block';
+                card.closest('section').style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', loadCart);
+</script>
+
+</body>
+</html>

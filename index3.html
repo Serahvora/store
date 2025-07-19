@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Qwerty | General Collection ✨</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f5f5dc; /* Beige */
+            color: #333;
+            padding-left: 200px; /* Space for sidebar */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 180px;
+            background: #a0522d; /* Sienna brown */
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .sidebar h3 {
+            font-size: 1.3rem;
+            color: #f0e68c; /* Khaki */
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            margin-bottom: 15px;
+            color: #d2b48c; /* Tan */
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            color: #fff8dc; /* Cornsilk */
+        }
+
+        /* Header */
+        header {
+            background-color: #b8860b; /* DarkGoldenrod */
+            padding: 30px 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .logo {
+            width: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #ffe4b5; /* Moccasin */
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #f0e68c; /* Khaki */
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #fffaf0, #f5f5dc); /* FloralWhite to Beige gradient */
+            color: #333;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #654321; /* Chocolate */
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #8fbc8f; /* DarkSeaGreen */
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #8b4513; /* SaddleBrown */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #a0522d; /* Sienna on hover */
+        }
+
+        /* Sections and Product Grid */
+        section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #a0522d; /* Sienna for section titles */
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #fff8dc; /* Cornsilk */
+            border: 2px solid #d2b48c; /* Tan border */
+            border-radius: 15px;
+            padding: 15px;
+            width: 180px;
+            box-shadow: 0 4px 10px rgba(160, 82, 45, 0.1); /* Sienna shadow */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 10px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+            color: #8b4513; /* SaddleBrown */
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            color: #696969; /* DimGray */
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #8b4513; /* SaddleBrown */
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-top: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #a0522d; /* Sienna on hover */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #d2b48c; /* Tan footer */
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #654321; /* Chocolate */
+        }
+
+        .funny-note {
+            font-size: 0.9rem;
+            margin-top: 40px;
+            text-align: center;
+            padding: 10px;
+            background-color: #f5f5dc; /* Beige */
+            color: #654321; /* Chocolate */
+        }
+
+        /* Falling Emoji Animation (Leaf) */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .fall-emoji {
+            position: fixed;
+            top: -50px;
+            animation: fall 3s linear forwards;
+            pointer-events: none;
+            user-select: none;
+            font-size: 25px;
+            z-index: 9999;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #fff8dc; /* Cornsilk */
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 350px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            background: #8b4513; /* SaddleBrown */
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #a0522d;
+        }
+
+        /* Mini Cart Sidebar */
+        #miniCart {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            width: 240px;
+            background: #f5f5dc; /* Beige */
+            border: 2px solid #d2b48c; /* Tan border */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 9999;
+        }
+
+        #miniCart h3 {
+            margin-top: 0;
+            color: #a0522d; /* Sienna */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #miniCart h3 span {
+            font-size: 0.9rem;
+            background-color: #d2b48c; /* Tan */
+            padding: 3px 8px;
+            border-radius: 10px;
+            color: #a0522d;
+        }
+
+        #miniCart p {
+            font-size: 0.9rem;
+            color: #696969; /* DimGray */
+            margin: 10px 0;
+        }
+
+        #cartList {
+            list-style: none;
+            padding-left: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        #cartList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px dotted #d2b48c; /* Tan dotted border */
+            color: #555;
+        }
+
+        #cartList li:last-child {
+            border-bottom: none;
+        }
+
+        #cartList li .remove-item {
+            background: none;
+            border: none;
+            color: #8b4513; /* SaddleBrown */
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0 5px;
+            transition: color 0.2s;
+        }
+
+        #cartList li .remove-item:hover {
+            color: #a0522d;
+        }
+
+        #sendCartBtn {
+            background: #8b4513; /* SaddleBrown */
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        #sendCartBtn:hover {
+            background-color: #a0522d;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #f5f5dc; /* Beige */
+            border-bottom: 2px solid #d2b48c; /* Tan border */
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type="text"] { /* Corrected selector */
+            width: 70%;
+            max-width: 400px;
+            padding: 10px 15px;
+            border: 2px solid #8b4513; /* SaddleBrown border */
+            border-radius: 25px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-container input[type="text"]:focus { /* Corrected selector */
+            border-color: #a0522d;
+            box-shadow: 0 0 8px rgba(139, 69, 19, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-left: 0;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                padding-bottom: 0;
+            }
+
+            .sidebar h3 {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .sidebar a {
+                display: inline-block;
+                margin: 0 10px 10px;
+            }
+
+            #miniCart {
+                position: static;
+                width: auto;
+                margin: 20px;
+            }
+
+            .search-container input[type="text"] { /* Corrected selector */
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>QWERTY</h3>
+    <a href="index1.html">👧 Girls</a>
+    <a href="index2.html">👦 Boys</a>
+    <a href="index3.html">🌟 General</a>
+</div>
+
+<header>
+    <img src="https://via.placeholder.com/80/a0522d/f0e68c?text=Q" alt="Qwerty Logo" class="logo">
+    <h1>Qwerty</h1>
+    <p class="tagline">Earthy. Essential. For Everyone. ✨</p>
+</header>
+
+<section class="hero">
+    <h2>🍂 Discover Natural Vibes & Timeless Finds 🌿</h2>
+    <p>Quality goods with a grounded style.</p>
+    <a href="#products" class="btn">Explore the Collection</a>
+</section>
+
+<div class="search-container">
+    <input type="text" id="productSearch" placeholder="Search for products...">
+</div>
+
+<section id="products">
+    <h2>Popular Picks! 📈</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Sustainable Cork Notebook" data-price="15.50" data-description="Eco-friendly notebook with a natural cork cover.">
+            <img src="https://via.placeholder.com/150/d2b48c/ffffff?text=Cork+Notebook" alt="Sustainable Cork Notebook">
+            <h3>Sustainable Cork Notebook</h3>
+            <p>$15.50</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Handwoven Cotton Throw" data-price="35.00" data-description="Soft and cozy handwoven cotton throw in natural tones.">
+            <img src="https://via.placeholder.com/150/f5f5dc/8fbc8f?text=Cotton+Throw" alt="Handwoven Cotton Throw">
+            <h3>Handwoven Cotton Throw</h3>
+            <p>$35.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Wooden Desk Organizer" data-price="22.00" data-description="Keep your space tidy with this stylish wooden organizer.">
+            <img src="https://via.placeholder.com/150/a0522d/f0e68c?text=Desk+Organizer" alt="Wooden Desk Organizer">
+            <h3>Wooden Desk Organizer</h3>
+            <p>$22.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Beeswax Candle (Natural Scent)" data-price="18.00" data-description="Natural beeswax candle with a subtle, calming scent.">
+            <img src="https://via.placeholder.com/150/b8860b/fff8dc?text=Beeswax+Candle" alt="Beeswax Candle">
+            <h3>Beeswax Candle (Natural Scent)</h3>
+            <p>$18.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section id="general-collection">
+    <h2>Essentials for Everyone 🎒</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Canvas Backpack (Neutral)" data-price="45.00" data-description="Durable canvas backpack in a versatile neutral color.">
+            <img src="https://via.placeholder.com/150/d2b48c/ffffff?text=Canvas+Backpack" alt="Canvas Backpack">
+            <h3>Canvas Backpack (Neutral)</h3>
+            <p>$45.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Stainless Steel Lunch Box" data-price="28.00" data-description="Reusable stainless steel lunch container. Eco-friendly.">
+            <img src="https://via.placeholder.com/150/8fbc8f/f5f5dc?text=Lunch+Box" alt="Stainless Steel Lunch Box">
+            <h3>Stainless Steel Lunch Box</h3>
+            <p>$28.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Organic Cotton Socks (3-Pair)" data-price="16.00" data-description="Soft and breathable organic cotton socks in earthy tones.">
+            <img src="https://via.placeholder.com/150/a0522d/fffaf0?text=Cotton+Socks" alt="Organic Cotton Socks">
+            <h3>Organic Cotton Socks (3-Pair)</h3>
+            <p>$16.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Recycled Paper Sketchbook" data-price="12.00" data-description="Sketchbook made with high-quality recycled paper.">
+            <img src="https://via.placeholder.com/150/b8860b/f5f5dc?text=Sketchbook" alt="Recycled Paper Sketchbook">
+            <h3>Recycled Paper Sketchbook</h3>
+            <p>$12.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section id="new-arrivals">
+    <h2>New Arrivals 🌱</h2>
+    <div class="product-grid">
+        <div class="product-card" data-title="Ceramic Coffee/Tea Mug" data-price="14.00" data-description="Simple and elegant ceramic mug for your favorite beverages.">
+            <img src="https://via.placeholder.com/150/d2b48c/fff8dc?text=Ceramic+Mug" alt="Ceramic Coffee/Tea Mug">
+            <h3>Ceramic Coffee/Tea Mug</h3>
+            <p>$14.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Essential Oil Diffuser (Wooden Base)" data-price="39.00" data-description="Stylish essential oil diffuser with a natural wooden base.">
+            <img src="https://via.placeholder.com/150/a0522d/f5f5dc?text=Diffuser" alt="Essential Oil Diffuser">
+            <h3>Essential Oil Diffuser (Wooden Base)</h3>
+            <p>$39.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Natural Lip Balm (Unscented)" data-price="6.50" data-description="Hydrating lip balm made with natural ingredients.">
+            <img src="https://via.placeholder.com/150/b8860b/fffaf0?text=Lip+Balm" alt="Natural Lip Balm">
+            <h3>Natural Lip Balm (Unscented)</h3>
+            <p>$6.50</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+        <div class="product-card" data-title="Braided Hemp Bracelet" data-price="9.00" data-description="Simple and stylish braided hemp bracelet. Adjustable size.">
+            <img src="https://via.placeholder.com/150/8fbc8f/f0e68c?text=Hemp+Bracelet" alt="Braided Hemp Bracelet">
+            <h3>Braided Hemp Bracelet</h3>
+            <p>$9.00</p>
+            <button class="add-to-cart-btn">🛒 Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<div class="modal" id="popupModal">
+    <div class="modal-content">
+        <h3 id="popupTitle">Product Title</h3>
+        <p id="popupPrice">Product Price</p>
+        <p id="popupDesc">Product Description</p>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<div id="miniCart">
+    <h3>🛍️ Your Cart <span id="cartItemCount">(0)</span></h3>
+    <p style="font-size:0.9rem; color:#696969; margin:10px 0;">⚠️ Don’t refresh this page if you want to lose your cart (just kidding, it saves now)!</p>
+    <ul id="cartList"></ul>
+    <button id="sendCartBtn">📤 Send via WhatsApp</button>
+</div>
+
+<footer>
+    <p>© 2025 Qwerty Drops • Teen Built</p>
+</footer>
+
+<div class="funny-note">
+    ⚠️ Heads up! This site is made by beginner teens learning to code. Thanks for being awesome and supporting our journey! 💻✨
+</div>
+
+<script>
+    const popupModal = document.getElementById('popupModal');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupPrice = document.getElementById('popupPrice');
+    const popupDesc = document.getElementById('popupDesc');
+    const productCards = document.querySelectorAll('.product-card');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const cartList = document.getElementById('cartList');
+    const sendCartBtn = document.getElementById('sendCartBtn');
+    const cartItemCountSpan = document.getElementById('cartItemCount');
+    const productSearchInput = document.getElementById('productSearch');
+    const allProductSections = document.querySelectorAll('section[id$="-collection"], section[id="products"]'); /* Corrected query */
+
+
+    // --- Modal Functionality ---
+    productCards.forEach(card => {
+        card.addEventListener('click', (event) => {
+            if (event.target.classList.contains('add-to-cart-btn')) {
+                return;
+            }
+            const title = card.dataset.title;
+            const price = card.dataset.price;
+            const description = card.dataset.description;
+
+            popupTitle.textContent = title;
+            popupPrice.textContent = `$${parseFloat(price).toFixed(2)}`;
+            popupDesc.textContent = description;
+            popupModal.classList.add('show');
+        });
+    });
+
+    function closeModal() {
+        popupModal.classList.remove('show');
+    }
+
+    popupModal.addEventListener('click', (event) => {
+        if (event.target === popupModal) {
+            closeModal();
+        }
+    });
+
+    // --- Cart Functionality ---
+    let cart = [];
+
+    function loadCart() {
+        const storedCart = localStorage.getItem('qwertyGeneralCart'); // Unique key for General page
+        if (storedCart) {
+            cart = JSON.parse(storedCart);
+            renderCart();
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem('qwertyGeneralCart', JSON.stringify(cart)); // Unique key for General page
+    }
+
+    function renderCart() {
+        cartList.innerHTML = '';
+        if (cart.length === 0) {
+            cartList.innerHTML = '<li style="color: #777; text-align: center;">Your cart is empty.</li>';
+        } else {
+            cart.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span>${item.title} - $${parseFloat(item.price).toFixed(2)}</span>
+                    <button class="remove-item" data-index="${index}">✖</button>
+                `;
+                cartList.appendChild(listItem);
+            });
+        }
+        updateCartItemCount();
+        saveCart();
+    }
+
+    function updateCartItemCount() {
+        cartItemCountSpan.textContent = `(${cart.length})`;
+    }
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const productCard = event.target.closest('.product-card');
+            const title = productCard.dataset.title;
+            const price = productCard.dataset.price;
+
+            cart.push({ title, price });
+            renderCart();
+        });
+    });
+
+    cartList.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-item')) {
+            const indexToRemove = parseInt(event.target.dataset.index);
+            cart.splice(indexToRemove, 1);
+            renderCart();
+        }
+    });
+
+    // --- WhatsApp Share Functionality ---
+    sendCartBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Your cart is empty! Add some items first. 🛍️');
+            return;
+        }
+
+        let message = "Hi Qwerty! I'd like to order the following general items:\n\n";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.title} - $${parseFloat(item.price).toFixed(2)}\n`;
+            total += parseFloat(item.price);
+        });
+
+        message += `\nTotal: $${total.toFixed(2)}`;
+        message += "\n\nCan you please confirm the availability and total for these items? Thanks! 😊";
+
+        // IMPORTANT: Replace 'YOUR_PHONE_NUMBER' with your actual WhatsApp number (e.g., 971501234567)
+        const YOUR_WHATSAPP_NUMBER = '971501234567'; // <-- REPLACE THIS WITH YOUR NUMBER
+        const whatsappURL = `https://wa.me/${YOUR_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappURL, '_blank');
+    });
+
+    // --- Falling Emojis Animation (Leaf) ---
+    function createFallingEmoji() {
+        const emoji = document.createElement('span');
+        emoji.classList.add('fall-emoji');
+        emoji.textContent = '🍂'; // Changed to a leaf emoji
+
+        emoji.style.left = `${Math.random() * 100}vw`;
+        emoji.style.animationDuration = `${Math.random() * 2 + 3}s`;
+        emoji.style.fontSize = `${Math.random() * 15 + 20}px`;
+
+        document.body.appendChild(emoji);
+
+        emoji.addEventListener('animationend', () => {
+            emoji.remove();
+        });
+    }
+
+    setInterval(createFallingEmoji, 500);
+
+    // --- Search Functionality ---
+    productSearchInput.addEventListener('keyup', () => {
+        const searchTerm = productSearchInput.value.toLowerCase();
+
+        if (searchTerm === "") {
+            allProductSections.forEach(section => {
+                section.style.display = 'block';
+            });
+            productCards.forEach(card => {
+                card.style.display = 'block';
+            });
+            return;
+        }
+
+        allProductSections.forEach(section => {
+            section.style.display = 'none';
+        });
+
+        productCards.forEach(card => {
+            const title = card.dataset.title.toLowerCase();
+            const description = card.dataset.description.toLowerCase();
+
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                card.style.display = 'block';
+                card.closest('section').style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', loadCart);
+</script>
+
+</body>
+</html>
